@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { EmployeeService } from '../../services/employee.service';
+import { AppointmentService} from '../../services/appointment.service';
+import {MatDialog} from '@angular/material/dialog';
+import { ModalDetalleAppointmentCComponent } from '../modal-detalle-appointment-c/modal-detalle-appointment-c.component';
 
 @Component({
   selector: 'app-home-customer',
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeCustomerComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
+  dataSource: any;
+  constructor(private employeeService: EmployeeService,
+              private appointmentService: AppointmentService,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.appointmentService.getAppointmentByIDCustomer(2).subscribe(res=>{
+      console.log('citas customer', res);
+      this.dataSource = res;
+    })
+    
+  }
+  verDetalles(element){
+    console.log(element);
+    const dialogRef = this.dialog.open(ModalDetalleAppointmentCComponent,{
+      width: '1100px',
+      height: '600px',
+      data: element
+      
+    })
   }
 
 }

@@ -80,7 +80,7 @@ body {
     justify-content: center;
     align-items: center;
     background-attachment: fixed;
-    background-image: url(../../../img/fondos/fondo1.jpg);
+    background-image: url(../../../assets/img/fondos/fondo1.jpg);
     background-position: center center;
     background-size: cover;
 }
@@ -127,7 +127,7 @@ body {
     background-attachment: scroll;
     background-position: center center;
     background-size: cover;
-    background-image: url(../../../img/fondos/fondo3.jpg);
+    background-image: url(../../../assets/img/fondos/fondo3.jpg);
 }
 
 #services .container {
@@ -177,7 +177,7 @@ body {
     background-attachment: fixed;
     background-position: center center;
     background-size: cover;
-    background-image: url(../../../img/fondos/fondo2.jpg)
+    background-image: url(../../../assets/img/fondos/fondo2.jpg)
 }
 
 #contact .container {

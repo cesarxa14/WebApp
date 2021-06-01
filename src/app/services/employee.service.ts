@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { Observable} from 'rxjs'
+import { Observable} from 'rxjs';
 // import { environment } from '../../environments/environment'
 
 @Injectable({
@@ -15,5 +15,9 @@ export class EmployeeService {
  
   getEmployees(): Observable<any>{
     return this.http.get(`${this.baseURL}`);
+  }
+
+  getEmployeeByID(id:number): Observable<any>{
+    return this.http.get(`${this.baseURL}/${id}`);
   }
 }

@@ -12,7 +12,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeCustomerComponent } from './components/home-customer/home-customer.component';
-import { HomeEmployeeComponent } from './components/home-employee/home-employee.component'
+import { HomeEmployeeComponent } from './components/home-employee/home-employee.component';
+import { ModalDetalleAppointmentCComponent } from './components/modal-detalle-appointment-c/modal-detalle-appointment-c.component';
+import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-appointment-e/modal-detalle-appointment-e.component'
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { HomeEmployeeComponent } from './components/home-employee/home-employee.
     RegisterComponent,
     HeaderComponent,
     HomeCustomerComponent,
-    HomeEmployeeComponent
+    HomeEmployeeComponent,
+    ModalDetalleAppointmentCComponent,
+    ModalDetalleAppointmentEComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,7 @@ import { HomeEmployeeComponent } from './components/home-employee/home-employee.
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalDetalleAppointmentCComponent, ModalDetalleAppointmentEComponent]
 })
 export class AppModule { }
