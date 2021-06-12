@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validator, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
-import { Account } from '../../models/account'
+import { Account } from '../../models/account';
+import { AuthService} from '../../services/auth.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginComponent implements OnInit {
     typeuser:''
   };
   loginForm: FormGroup;
-  constructor(private _formBuilder : FormBuilder) { }
+  constructor(private _formBuilder : FormBuilder,
+              private authService : AuthService,
+              private router : Router) { }
 
   ngOnInit() {
     this.loginForm = this._builderForm();
@@ -40,6 +44,18 @@ export class LoginComponent implements OnInit {
   login(){
     this.account.username = this.usuario.value;
     this.account.password = this.password.value;
+    let obj = {
+      username: this.usuario.value,
+      password: this.password.value
+    }
+    this.authService.login(obj).subscribe(res=>{
+      if(res.userType == 1) {
+        this.router.navigateByUrl('/home-customer');
+      } else if(res.userType == 2) {
+        this.router.navigateByUrl('/home-employee');
+      }
+      console.log(res);
+    })
     console.log(this.account.username, this.account.password)
   }
 

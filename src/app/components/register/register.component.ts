@@ -3,6 +3,13 @@ import {FormBuilder, FormGroup, Validator, FormControl, Validators, ReactiveForm
 import { Account } from '../../models/account';
 import { MatStepper } from '@angular/material/stepper';
 import { Router} from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { CustomerService } from '../../services/customer.service';
+import { EmployeeService } from '../../services/employee.service';
+import { SpecialtyService } from '../../services/specialty.service';
+import { CityService } from '../../services/city.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-register',
@@ -11,18 +18,42 @@ import { Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
+  cities: any[];
+  districts: any[];
+  specialties: any[];
+
+  ID_CREATED: number;
+  ID_CITY: number;
+  ID_DISTRICT: number;
+  ID_SPECIALTY: number;
+
+  customerNew: any;
+  employeeNew: any;
   account: Account = {username:'', password:'', typeuser:null};
   registerForm1: FormGroup;
   registerForm2: FormGroup;
   registerForm3: FormGroup;
   firstData: boolean = true;
   constructor(private _formBuilder : FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService,
+              private customerService: CustomerService,
+              private employeeService: EmployeeService,
+              private cityService: CityService,
+              private specialtyService: SpecialtyService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.registerForm1 = this._builderForm();
     this.registerForm2 = this._builderForm2();
     this.registerForm3 = this._builderForm3();
+    this.cityService.getCities().subscribe(cities =>{
+      this.cities = cities;
+    })
+
+    this.specialtyService.getSpecialties().subscribe(spe=>{
+      this.specialties = spe;
+    })
 
   }
 
@@ -30,7 +61,6 @@ export class RegisterComponent implements OnInit {
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
       usuario: ['', [Validators.required, Validators.pattern(pattern)]],
-      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
       typeuser: [null, [Validators.required]]
     }) 
@@ -54,15 +84,22 @@ export class RegisterComponent implements OnInit {
       dni: ['', [Validators.required]],
       email: ['', [Validators.required]],
       cellphone: ['', [Validators.required]],
-      id_account: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      district: ['', [Validators.required]],
+      city: [null, [Validators.required]],
+      district: [null, [Validators.required]],
     }) 
     form.valueChanges.subscribe(()=>{
       // this.invalidForm = this.loginForm.invalid;
     });
     return form;
   }
+
+  get firstnameC() { return this.registerForm2.controls['firstname']; }
+  get lastnameC() { return this.registerForm2.controls['lastname']; }
+  get dniC() { return this.registerForm2.controls['dni']; }
+  get emailC() { return this.registerForm2.controls['email']; }
+  get cellphoneC() { return this.registerForm2.controls['cellphone']; }
+  get cityC() { return this.registerForm2.controls['city']; }
+  get districtC() { return this.registerForm2.controls['district']; }
 
   _builderForm3(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
@@ -73,15 +110,23 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required]],
       specialty: ['', [Validators.required]],
       cellphone: ['', [Validators.required]],
-      id_account: ['', [Validators.required]],
-      city: ['', [Validators.required]],
-      district: ['', [Validators.required]],
+      city: [null, [Validators.required]],
+      district: [null, [Validators.required]]
     }) 
     form.valueChanges.subscribe(()=>{
       // this.invalidForm = this.loginForm.invalid;
     });
     return form;
   }
+
+  get firstnameE() { return this.registerForm3.controls['firstname']; }
+  get lastnameE() { return this.registerForm3.controls['lastname']; }
+  get dniE() { return this.registerForm3.controls['dni']; }
+  get emailE() { return this.registerForm3.controls['email']; }
+  get cellphoneE() { return this.registerForm3.controls['cellphone']; }
+  get cityE() { return this.registerForm3.controls['city']; }
+  get districtE() { return this.registerForm3.controls['district']; }
+  get specialtyE() { return this.registerForm3.controls['specialty']; }
     
 
 
@@ -89,17 +134,115 @@ export class RegisterComponent implements OnInit {
     this.account.username = this.usuario.value;
     this.account.password = this.password.value;
     this.account.typeuser = this.typeuser.value;
-    console.log(this.registerForm1.value)
-    this.firstData = false
-    setTimeout(()=>{
-      //Aca se pondra el servicio que validara los datos y despues se pasara al siguiente paso
-      stepper.next()
-    },3000)
+
+    let obj = {
+      username: this.usuario.value,
+      password : this.password.value,
+      userType: this.typeuser.value
+    }
+
+    // console.log(obj)
+
+    this.authService.validateUser(obj).subscribe(res=>{
+      this.ID_CREATED = res.id;
+      if(!res.msj) {
+        this.firstData = false
+        stepper.next();
+      }
+      else{
+        this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition:'start'})
+      }
+    })
     
   }
 
+  selectCity(event){
+    this.cityService.getDistrictsByCity(event.value).subscribe(res=>{
+      this.districts = res;
+    })
+  }
+
+  selectSpecialty(event) {
+    this.ID_SPECIALTY = event.value;
+  }
+
+  validarEmail(stepper: MatStepper){
+    if(this.typeuser.value == "1"){
+      this.customerNew = {
+        account: {
+          id: this.ID_CREATED,
+        },
+        cellphone: this.cellphoneC.value,
+        district: {
+          city: {
+            id: this.cityC.value,
+          },
+          id: this.districtC.value
+        },
+        dni: this.dniC.value,
+        email: this.emailC.value,
+        firstName: this.firstnameC.value,
+        lastName: this.lastnameC.value        
+      }
+      this.customerService.validateEmail(this.customerNew).subscribe(res=>{
+        if(!res || !res.msj){
+          stepper.next()
+        } else{
+          this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition: 'start'});
+        }
+      })
+      console.log(this.registerForm2.value)
+    }
+    else if(this.typeuser.value == '2') {
+      this.employeeNew = {
+        account: {
+          id: this.ID_CREATED,
+        },
+        birthday: new Date(),//falta este
+        cellphone: this.cellphoneE.value,
+        district: {
+          city: {
+            id: this.cityE.value,
+          },
+          id: this.districtE.value
+        },
+        dni: this.dniE.value,
+        email: this.emailE.value,
+        firstName: this.firstnameE.value,
+        lastName: this.lastnameE.value,
+        specialty: {
+          id: this.ID_SPECIALTY
+        }
+      }
+      console.log(this.employeeNew)
+      this.employeeService.validateEmail(this.employeeNew).subscribe(res =>{
+        console.log(res)
+        if(!res || !res.msj){
+          stepper.next()
+        } else{
+          this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition: 'start'});
+        }
+      })
+    }
+  }
+
   registrarse(){
-    this.router.navigateByUrl('/')
+    if(this.typeuser.value == "1"){
+      this.customerService.insertCustomer(this.customerNew).subscribe(res =>{
+        res.account.userType = 1;
+        localStorage.setItem('metadata', JSON.stringify(res));
+        console.log(res)
+        this.router.navigateByUrl('/home-customer');
+      })
+    }
+    if(this.typeuser.value == "2") {
+      this.employeeService.insertEmployee(this.employeeNew).subscribe(res =>{
+        res.account.userType = 2;
+        localStorage.setItem('metadata', JSON.stringify(res));
+        console.log(res)
+        this.router.navigateByUrl('/home-employee');
+      })
+    }
   }
 
 }

@@ -17,7 +17,15 @@ export class EmployeeService {
     return this.http.get(`${this.baseURL}`);
   }
 
+  insertEmployee(employee): Observable<any> {
+    return this.http.post(`${this.baseURL}`, employee)
+  }
+
   getEmployeeByID(id:number): Observable<any>{
     return this.http.get(`${this.baseURL}/${id}`);
+  }
+
+  validateEmail(employee): Observable<any> {
+    return this.http.post(`${this.baseURL}/validateEmail`, employee);
   }
 }

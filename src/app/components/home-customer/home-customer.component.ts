@@ -11,6 +11,7 @@ import { ModalDetalleAppointmentCComponent } from '../modal-detalle-appointment-
 })
 export class HomeCustomerComponent implements OnInit {
 
+  metadata:any = JSON.parse(localStorage.getItem('metadata'))
   displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
   dataSource: any;
   constructor(private employeeService: EmployeeService,
@@ -18,7 +19,7 @@ export class HomeCustomerComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.appointmentService.getAppointmentByIDCustomer(2).subscribe(res=>{
+    this.appointmentService.getAppointmentByIDCustomer(this.metadata.id).subscribe(res=>{
       console.log('citas customer', res);
       this.dataSource = res;
     })

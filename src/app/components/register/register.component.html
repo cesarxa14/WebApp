@@ -11,20 +11,20 @@
                 <input matInput placeholder="Ingresa tu usuario" formControlName="usuario">
             </mat-form-field>
     
-            <mat-form-field appearance="fill">
+            <!-- <mat-form-field appearance="fill">
                 <mat-label>Correo</mat-label>
                 <input matInput placeholder="Ingresa tu usuario" formControlName="email">
-            </mat-form-field>
+            </mat-form-field> -->
     
             <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
                 <input matInput placeholder="Ingresa tu contraseña" formControlName="password">
             </mat-form-field>
     
-            <mat-form-field appearance="fill">
+            <!-- <mat-form-field appearance="fill">
                 <mat-label>Repita su contraseña</mat-label>
                 <input matInput placeholder="Ingresa tu contraseña" formControlName="password">
-            </mat-form-field>
+            </mat-form-field> -->
     
             <mat-radio-group style="grid-column: 1/3;" aria-label="Select an option" formControlName="typeuser">
                 <mat-radio-button value="1" style="margin-right: 20px; margin-bottom: 20px;">Cliente</mat-radio-button>
@@ -64,18 +64,37 @@
                 <input matInput formControlName="cellphone" placeholder="Ingrese su numero de celular" required>
               </mat-form-field>
 
-              <mat-form-field>
+              <!-- <mat-form-field>
                 <mat-label>Ciudad</mat-label>
                 <input matInput formControlName="city" placeholder="Ingrese su ciudad" required>
+              </mat-form-field> -->
+
+              <mat-form-field appearance="fill">
+                <mat-label>Ciudad</mat-label>
+                <mat-select formControlName="city"  (selectionChange)="selectCity($event)">
+                  <mat-option *ngFor="let city of cities" [value]="city.id">
+                    {{city.name}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
 
-              <mat-form-field>
+
+              <mat-form-field appearance="fill">
+                <mat-label>Distrito</mat-label>
+                <mat-select formControlName="district" [disabled]="!districts">
+                  <mat-option *ngFor="let district of districts" [value]="district.id">
+                    {{district.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <!-- <mat-form-field>
                 <mat-label>Distrito</mat-label>
                 <input matInput formControlName="district" placeholder="Ingrese su distrito" required>
-              </mat-form-field>
+              </mat-form-field> -->
             <div>
-              <button mat-button matStepperPrevious>Regresar</button>
-              <button mat-button matStepperNext>Siguiente</button>
+              <!-- <button mat-button matStepperPrevious>Regresar</button> -->
+              <button mat-button  color="primary" (click)="validarEmail(stepper)">Siguiente</button>
             </div>
           </form>
         </mat-step>
@@ -102,9 +121,18 @@
                   <input matInput formControlName="email" placeholder="Ingrese su correo" required>
                 </mat-form-field>
 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>Especialidad</mat-label>
                     <input matInput formControlName="specialty" placeholder="Ingrese su especialidad" required>
+                  </mat-form-field> -->
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Especialidad</mat-label>
+                    <mat-select formControlName="specialty" (selectionChange)="selectSpecialty($event)">
+                      <mat-option *ngFor="let spe of specialties" [value]="spe.id">
+                        {{spe.name}}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
   
                 <mat-form-field>
@@ -112,18 +140,28 @@
                   <input matInput formControlName="cellphone" placeholder="Ingrese su numero de celular" required>
                 </mat-form-field>
   
-                <mat-form-field>
+
+                <mat-form-field appearance="fill">
                   <mat-label>Ciudad</mat-label>
-                  <input matInput formControlName="city" placeholder="Ingrese su ciudad" required>
+                  <mat-select formControlName="city" (selectionChange)="selectCity($event)">
+                    <mat-option *ngFor="let city of cities" [value]="city.id">
+                      {{city.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill">
+                  <mat-label>Distrito</mat-label>
+                  <mat-select formControlName="district" [disabled]="!districts">
+                    <mat-option *ngFor="let district of districts" [value]="district.id">
+                      {{district.name}}
+                    </mat-option>
+                  </mat-select>
                 </mat-form-field>
   
-                <mat-form-field>
-                  <mat-label>Distrito</mat-label>
-                  <input matInput formControlName="district" placeholder="Ingrese su distrito" required>
-                </mat-form-field>
               <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <!-- <button mat-button matStepperPrevious>Regresar</button> -->
+                <button mat-button color="primary" (click)="validarEmail(stepper)">Siguiente</button>
               </div>
             </form>
           </mat-step>
@@ -132,8 +170,8 @@
           <ng-template matStepLabel>Done</ng-template>
           <p>Confirmar Registro</p>
           <div>
-            <button mat-button matStepperPrevious>Regresar</button>
-            <button mat-button (click)="registrarse()">Registrarse</button>
+            <!-- <button mat-button matStepperPrevious>Regresar</button> -->
+            <button mat-button color="primary" (click)="registrarse()">Registrarse</button>
           </div>
         </mat-step>
       </mat-horizontal-stepper>  

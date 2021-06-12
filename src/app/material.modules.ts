@@ -15,6 +15,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -35,7 +36,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatTableModule,
         MatProgressBarModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        MatSelectModule
     ],
     exports: [
         MatTabsModule,
@@ -53,7 +55,8 @@ import {MatStepperModule} from '@angular/material/stepper';
         MatTableModule,
         MatProgressBarModule,
         MatRadioModule,
-        MatStepperModule
+        MatStepperModule,
+        MatSelectModule
     ]
 })
 
