@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
       password: this.password.value
     }
     this.authService.login(obj).subscribe(res=>{
+      localStorage.setItem('metadata', JSON.stringify(res))
       if(res.userType == 1) {
         this.router.navigateByUrl('/home-customer');
       } else if(res.userType == 2) {

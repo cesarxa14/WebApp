@@ -25,7 +25,15 @@ export class EmployeeService {
     return this.http.get(`${this.baseURL}/${id}`);
   }
 
+  getEmployeeByIdAccount(idAccount): Observable<any> {
+    return this.http.get(`${this.baseURL}/searchByIdAccount/${idAccount}`);
+  }
+
   validateEmail(employee): Observable<any> {
     return this.http.post(`${this.baseURL}/validateEmail`, employee);
+  }
+
+  updateEmployee(id, employee): Observable<any> {
+    return this.http.put(`${this.baseURL}/${id}`, employee);
   }
 }

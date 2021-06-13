@@ -4,15 +4,18 @@ import { HomeCustomerComponent } from './components/home-customer/home-customer.
 import { HomeEmployeeComponent } from './components/home-employee/home-employee.component';
 import { LandingComponent} from './components/landing/landing.component'
 import { LoginComponent } from './components/login/login.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
   {path: '' , component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'home-customer', component: HomeCustomerComponent},
-  {path: 'home-employee', component: HomeEmployeeComponent}
+  {path: 'home-customer', canActivate:[AuthGuard], component: HomeCustomerComponent},
+  {path: 'home-employee', canActivate:[AuthGuard], component: HomeEmployeeComponent},
+  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent}
 ];
 
 @NgModule({

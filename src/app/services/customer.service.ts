@@ -15,7 +15,15 @@ export class CustomerService {
     return this.http.post(`${this.baseURL}/validateEmail`, customer);
   }
 
+  getCustomerByIdAccount(idAccount): Observable<any> {
+    return this.http.get(`${this.baseURL}/searchByIdAccount/${idAccount}`);
+  }
+
   insertCustomer(customer): Observable<any> {
     return this.http.post(`${this.baseURL}`, customer);
+  }
+
+  updateCustomer(id, customer): Observable<any> {
+    return this.http.put(`${this.baseURL}/${id}`, customer);
   }
 }

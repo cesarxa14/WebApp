@@ -16,6 +16,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule} from '@angular/material/core';
 
 
 
@@ -37,7 +39,10 @@ import {MatSelectModule} from '@angular/material/select';
         MatProgressBarModule,
         MatRadioModule,
         MatStepperModule,
-        MatSelectModule
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
+        
     ],
     exports: [
         MatTabsModule,
@@ -56,7 +61,9 @@ import {MatSelectModule} from '@angular/material/select';
         MatProgressBarModule,
         MatRadioModule,
         MatStepperModule,
-        MatSelectModule
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 

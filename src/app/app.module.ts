@@ -14,7 +14,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { HomeCustomerComponent } from './components/home-customer/home-customer.component';
 import { HomeEmployeeComponent } from './components/home-employee/home-employee.component';
 import { ModalDetalleAppointmentCComponent } from './components/modal-detalle-appointment-c/modal-detalle-appointment-c.component';
-import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-appointment-e/modal-detalle-appointment-e.component'
+import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-appointment-e/modal-detalle-appointment-e.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ModalEditProfileComponent } from './components/modal-edit-profile/modal-edit-profile.component'
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-ap
     HomeCustomerComponent,
     HomeEmployeeComponent,
     ModalDetalleAppointmentCComponent,
-    ModalDetalleAppointmentEComponent
+    ModalDetalleAppointmentEComponent,
+    ProfileComponent,
+    ModalEditProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,6 @@ import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-ap
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDetalleAppointmentCComponent, ModalDetalleAppointmentEComponent]
+  entryComponents: [ModalDetalleAppointmentCComponent, ModalDetalleAppointmentEComponent, ModalEditProfileComponent]
 })
 export class AppModule { }

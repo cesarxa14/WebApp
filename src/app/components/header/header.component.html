@@ -1,6 +1,23 @@
 <div class="container cabecera">
-    <mat-toolbar color="primary" class="mt-5">
+    <!-- <mat-toolbar color="primary" class="mt-5">
         <img class="logo" src="../../../assets/img/avatar.png" alt="">
         <h1>DHome Technical</h1>
-    </mat-toolbar>
+        
+    </mat-toolbar> -->
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+            <img class="logo" src="../../../assets/img/avatar.png" alt="">
+          <span class="app-name">DHome Technical</span>
+          <div routerLinkActive="active" *ngIf="metadata">
+            <a mat-button  (click)="toHomePage()">Home</a>
+            <a mat-button  [routerLink]="'/customer'">Customers</a>
+            <a mat-button  [routerLink]="'/employees'">Employee</a>
+            <a mat-button  [routerLink]="'/profile'">Profile</a>
+          </div>
+          <span class="flex-expand"></span>
+          <div >
+            <button mat-button (click)="logout()">LogOut</button>
+          </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
 </div>
