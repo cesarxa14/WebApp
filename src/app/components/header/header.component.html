@@ -15,7 +15,7 @@
             <a mat-button  [routerLink]="'/profile'">Profile</a>
           </div>
           <span class="flex-expand"></span>
-          <div >
+          <div *ngIf="metadata">
             <button mat-button (click)="logout()">LogOut</button>
           </div>
         </mat-toolbar-row>

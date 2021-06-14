@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { AppointmentService} from '../../services/appointment.service';
+import { CustomerService } from '../../services/customer.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ModalDetalleAppointmentCComponent } from '../modal-detalle-appointment-c/modal-detalle-appointment-c.component';
 
@@ -16,13 +17,18 @@ export class HomeCustomerComponent implements OnInit {
   dataSource: any;
   constructor(private employeeService: EmployeeService,
               private appointmentService: AppointmentService,
-              public dialog: MatDialog) { }
+              public dialog: MatDialog,
+              private customerService: CustomerService) { }
 
   ngOnInit() {
-    this.appointmentService.getAppointmentByIDCustomer(this.metadata.id).subscribe(res=>{
-      console.log('citas customer', res);
-      this.dataSource = res;
+    this.customerService.getCustomerByIdAccount(this.metadata.id).subscribe(customer=>{
+      console.log('hola', customer) 
+      this.appointmentService.getAppointmentByIDCustomer(customer.id).subscribe(res=>{
+        console.log('citas customer', res);
+        this.dataSource = res;
+      })
     })
+    
     
   }
   verDetalles(element){
