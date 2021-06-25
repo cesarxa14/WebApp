@@ -57,6 +57,7 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  // este construye el formulario para crear la cuenta
   _builderForm(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
@@ -76,6 +77,7 @@ export class RegisterComponent implements OnInit {
    get typeuser(){ return this.registerForm1.controls['typeuser']}
 
 
+   // este formulario es para los campos de un nuevo customer
   _builderForm2(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
@@ -101,6 +103,8 @@ export class RegisterComponent implements OnInit {
   get cityC() { return this.registerForm2.controls['city']; }
   get districtC() { return this.registerForm2.controls['district']; }
 
+
+  // este formulario es para los campos de un nuevo employee
   _builderForm3(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
@@ -130,6 +134,7 @@ export class RegisterComponent implements OnInit {
     
 
 
+  // esta funcion sirve para validar que el nombre de usuario sea uno nuevo
   validarDatos(stepper: MatStepper){
     this.account.username = this.usuario.value;
     this.account.password = this.password.value;
@@ -144,31 +149,38 @@ export class RegisterComponent implements OnInit {
     // console.log(obj)
 
     this.authService.validateUser(obj).subscribe(res=>{
+      //aca se valida que el nombre de usuario no existia
       this.ID_CREATED = res.id;
       if(!res.msj) {
         this.firstData = false
+        // y se pasa al siguiente paso o formulario
         stepper.next();
       }
       else{
+        // en caso de que el nombre de usuario ya exista se muestra un mensaje para informar eso 
         this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition:'start'})
       }
     })
     
   }
 
+  //funcion que se llama cada vez que se selecciona una ciudad
   selectCity(event){
+    // se obtienen los distritos dependiendo de la ciudad seleccionada
     this.cityService.getDistrictsByCity(event.value).subscribe(res=>{
       this.districts = res;
     })
   }
 
+  //funcion que se llama cada vez que se selecciona una especialidad
   selectSpecialty(event) {
     this.ID_SPECIALTY = event.value;
   }
 
+  //esta funcion valida que el email no exista aun en la base de datos
   validarEmail(stepper: MatStepper){
     if(this.typeuser.value == "1"){
-      this.customerNew = {
+      this.customerNew = { // para el caso de los customers
         account: {
           id: this.ID_CREATED,
         },
@@ -185,15 +197,15 @@ export class RegisterComponent implements OnInit {
         lastName: this.lastnameC.value        
       }
       this.customerService.validateEmail(this.customerNew).subscribe(res=>{
-        if(!res || !res.msj){
+        if(!res || !res.msj){ // si el email no existe se pasa al siguiente paso sin problemas
           stepper.next()
-        } else{
+        } else{ // si el usuario ya existe se muestra un mensaje con esto
           this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition: 'start'});
         }
       })
       console.log(this.registerForm2.value)
     }
-    else if(this.typeuser.value == '2') {
+    else if(this.typeuser.value == '2') { // para el caso de los employees
       this.employeeNew = {
         account: {
           id: this.ID_CREATED,
@@ -217,9 +229,9 @@ export class RegisterComponent implements OnInit {
       console.log(this.employeeNew)
       this.employeeService.validateEmail(this.employeeNew).subscribe(res =>{
         console.log(res)
-        if(!res || !res.msj){
+        if(!res || !res.msj){// si el email no existe se pasa al siguiente paso sin problemas
           stepper.next()
-        } else{
+        } else{ // si el usuario ya existe se muestra un mensaje con esto
           this._snackBar.open(res.msj, 'Cerrar', {duration:4000, horizontalPosition: 'start'});
         }
       })
@@ -227,19 +239,23 @@ export class RegisterComponent implements OnInit {
   }
 
   registrarse(){
-    if(this.typeuser.value == "1"){
+    if(this.typeuser.value == "1"){ // se registra al customer 
       this.customerService.insertCustomer(this.customerNew).subscribe(res =>{
         res.account.userType = 1;
+        //se guarda en el localStorage la info de la cuenta como metadata
         localStorage.setItem('metadata', JSON.stringify(res));
         console.log(res)
+        // se redirecciona al home que pertecene
         this.router.navigateByUrl('/home-customer');
       })
     }
-    if(this.typeuser.value == "2") {
+    if(this.typeuser.value == "2") { // se registra al employee
       this.employeeService.insertEmployee(this.employeeNew).subscribe(res =>{
         res.account.userType = 2;
+        //se guarda en el localStorage la info de la cuenta como metadata
         localStorage.setItem('metadata', JSON.stringify(res));
         console.log(res)
+        // se redirecciona al home que pertecene
         this.router.navigateByUrl('/home-employee');
       })
     }

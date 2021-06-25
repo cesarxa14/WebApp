@@ -1,13 +1,12 @@
+<!--Este componente es la barra azul que aparece en todas las vistas-->
 <div class="container cabecera">
-    <!-- <mat-toolbar color="primary" class="mt-5">
-        <img class="logo" src="../../../assets/img/avatar.png" alt="">
-        <h1>DHome Technical</h1>
-        
-    </mat-toolbar> -->
     <mat-toolbar color="primary">
         <mat-toolbar-row>
             <img class="logo" src="../../../assets/img/avatar.png" alt="">
           <span class="app-name">DHome Technical</span>
+          
+          <!-- En este div se ponen los botones que redireccionan a las distintas vistas de la app -->
+          <!-- El ngIf=metadata significa que si el usuario ha ingresado a la app se creara un metadata para mostrar los botones si esta logeado -->
           <div routerLinkActive="active" *ngIf="metadata">
             <a mat-button  (click)="toHomePage()">Home</a>
             <a mat-button  [routerLink]="'/customer'">Customers</a>
@@ -15,6 +14,7 @@
             <a mat-button  [routerLink]="'/profile'">Profile</a>
           </div>
           <span class="flex-expand"></span>
+          <!-- Igual para este boton de LogOut, que solo se mostrara si el usuario esta logeado -->
           <div *ngIf="metadata">
             <button mat-button (click)="logout()">LogOut</button>
           </div>

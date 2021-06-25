@@ -1,6 +1,8 @@
 <div>
     <h1>Edit Profile</h1>
+    <!-- Este mat progress es para que se muestra una barra de carga cuando se da click en editar  -->
     <mat-progress-bar *ngIf="progress_bar" mode="query"></mat-progress-bar>
+    <!-- Este formulario es para editar el profile de un customer y todos sus atributos  -->
     <div *ngIf="data.metadata.userType == 1" >
         <form class="formulario" [formGroup]="editForm">
     
@@ -79,6 +81,7 @@
     
     </div>
 
+    <!-- Este formulario es para editar el profile de un employee y todos sus atributos  -->
     <div *ngIf="data.metadata.userType == 2">
         <form class="formulario" [formGroup]="editForm">
     

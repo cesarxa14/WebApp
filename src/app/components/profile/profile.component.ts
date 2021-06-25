@@ -22,9 +22,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.progress_bar = true;
     if(this.metadata.userType == 1){
+      // se trae toda la data del customer mediante el id 
       this.customerService.getCustomerByIdAccount(this.metadata.id).subscribe(res=>{
         this.data = res;
         this.progress_bar = false;
+        //en esta variable guardaran los datos para que los muestre en el html
         this.user = {
           firstName: res.firstName,
           lastName: res.lastName,
@@ -41,6 +43,7 @@ export class ProfileComponent implements OnInit {
       this.employeeService.getEmployeeByIdAccount(this.metadata.id).subscribe(res=>{
         this.data = res;
         this.progress_bar = false;
+        //en esta variable guardaran los datos para que los muestre en el html
         this.user = {
           firstName: res.firstName,
           lastName: res.lastName,
@@ -57,15 +60,19 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  //esta funcion abrira el modal para editar el perfil
   abrirModalEditar(){
+    // se abrira en un modal lo que hay en el componente ModalEditProfileComponent
     const dialogRef = this.dialog.open(ModalEditProfileComponent, {
       width: '900px',
       height: '650px',
+      //se envia al componente ModalEditProfileComponent el user y la metadata como data inyectable
       data: {user: this.data, metadata: this.metadata}
     })
 
+    //aca se recibe la data despues de haberla editado en el componente ModalEditProfileComponent
     dialogRef.componentInstance.edit.subscribe(data =>{
-
+      
       if(this.metadata.userType == 1) {
         this.user = {
           firstName: data.user.firstName,

@@ -1,8 +1,10 @@
+<!-- Este componente es para mostrar la info del Perfil y para actualizarlo tambien  -->
 <app-header></app-header>
 <div>
     <div class="contenedor" *ngIf="user">
       <mat-progress-bar *ngIf="progress_bar" mode="query"></mat-progress-bar>
       <mat-card>
+        <!-- Este boton es para abril el modal donde se editara la info del perfil, llamara la funcion abrirModalEditar() cuando se haga click  -->
         <button (click)="abrirModalEditar()" class="button-editar" mat-raised-button color="primary"> Editar <span class="material-icons">
           edit
           </span></button>
@@ -41,6 +43,7 @@
             <h4>{{user.district}}</h4>
           </div>
   
+          <!-- Esta columna solo se mostrara si el usuario es un employee  -->
           <div *ngIf="metadata.userType == 2">
             <h3>Birthday</h3>
             <h4>{{user.birthday}}</h4>
@@ -56,6 +59,7 @@
             <h4>{{user.dni}}</h4>
           </div>
 
+          <!-- Esta columna solo se mostrara si el usuario es un employee  -->
           <div *ngIf="metadata.userType == 2">
             <h3>Specialty</h3>
             <h4>{{user.specialty}}</h4>

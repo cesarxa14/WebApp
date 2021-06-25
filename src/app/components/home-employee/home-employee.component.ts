@@ -14,36 +14,31 @@ import { ModalDetalleAppointmentEComponent } from '../modal-detalle-appointment-
 export class HomeEmployeeComponent implements OnInit {
  
   metadata:any = JSON.parse(localStorage.getItem('metadata'))
-  dataSource1 = [
-    {
-      titulo:'1',
-      subtitulo:'sub1',
-      desc_tag:'dtag1',
-      editar:'e',
-      eliminar:'el',
-      foto_noticia:'que fox'
-    }
-  ]
+ 
+  //estas son las columnas que tendra la tabla, si se quieren poner mas columnas se agregar un elemento a este array
   displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
+
   dataSource: any;
   constructor(private employeeService: EmployeeService,
               private appointmentService: AppointmentService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    console.log(this.metadata)
+    //se traen los appointments segun el id del employee
     this.appointmentService.getAppointmentByIDEmployee(this.metadata.id).subscribe(res=>{
+      //aqui se llena el dataSource que se pone en el html para mostrar la data
       this.dataSource = res;
       console.log(res);
     })
   }
 
+  // esta funcion es para abrir el modal donde se mostrara toda la info de dicho appointment
   verDetalles(element){
     console.log(element);
     const dialogRef = this.dialog.open(ModalDetalleAppointmentEComponent,{
       width: '1100px',
       height: '600px',
-      data: element
+      data: element //este element se manda como data inyectable al componente ModalDetalleAppointmentEComponent
       
     })
   }

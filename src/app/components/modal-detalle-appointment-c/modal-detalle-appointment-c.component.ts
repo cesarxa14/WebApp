@@ -8,6 +8,8 @@ import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 })
 export class ModalDetalleAppointmentCComponent implements OnInit {
 
+  //esta variable data se inyecta desde la llamada de la funcion verDetalles
+  //esta variable data es un appointment con todos sus atributos
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {

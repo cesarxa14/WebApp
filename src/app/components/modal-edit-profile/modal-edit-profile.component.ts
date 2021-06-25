@@ -39,15 +39,15 @@ export class ModalEditProfileComponent implements OnInit {
     this.districtAux = {id:this.data.user.district.id, name: this.data.user.district.name };
     this.specialtyAux = this.data.user.specialty;
     
+    //se traen las ciudades desde base de datos para poder elegir en el mat select del html
     this.cityService.getCities().subscribe(res =>{
       this.cities = res;
     })
 
-
-
-    if(this.data.metadata.userType == 1) {
+    //aca se elige si el userType es customer o employee para inicializar su respectivo formulario
+    if(this.data.metadata.userType == 1) { // customer
       this.editForm = this._builderForm();
-    } else if(this.data.metadata.userType == 2) {
+    } else if(this.data.metadata.userType == 2) { //employee
       this.specialtyService.getSpecialties().subscribe(res =>{
         this.specialties = res;
       })
@@ -55,7 +55,7 @@ export class ModalEditProfileComponent implements OnInit {
     }
     
   }
-
+  // se construye el formulario para los datos de un profile customer
   _builderForm(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
@@ -78,6 +78,8 @@ export class ModalEditProfileComponent implements OnInit {
   get cityC() { return this.editForm.controls['city']; }
   get districtC() { return this.editForm.controls['district']; }
 
+
+  // se construye el formulario para los datos de un profile employee
   _builderForm2(){
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
@@ -104,27 +106,36 @@ export class ModalEditProfileComponent implements OnInit {
   get birthdayE() { return this.editForm.controls['birthday']; }
   get specialtyE() { return this.editForm.controls['specialty']; }
 
+  //esta funcion viene desde el mat select del formControl city
   selectCity(event){
+    //el parametro event trae la ciudad que se seleccionado
     this.cityAux = event.value;
+    // se traen los distritos de la ciudad (event) que se ha seleccionado
     this.cityService.getDistrictsByCity(event.value.id).subscribe(res=>{
       this.districts = res;
     })
   }
 
+  //esta funcion se ejecuta cuando se cambia de distrito en el mat select
   selectDistrict(event){
     this.districtAux = event.value;
 
   }
 
+   //esta funcion se ejecuta cuando se cambia de specialty en el mat select
   selectSpecialty(event) {
     this.specialtyAux = event.value;
 
   }
 
+  //esta funcion es para editar la informacion del perfil
   editProfile(){
+    //se muestra la barra de progreso mientras se va editando en la base de datos
     this.progress_bar = true;
 
-    if(this.data.metadata.userType == 1) {
+    if(this.data.metadata.userType == 1) { // si el userType es customer entonces se mandan con una estructura de obj distinta
+      
+      //la estructura de este json obj me guie de como lo manda en el swagger y lo copie
       let obj = {
         account: {
           id: this.data.metadata.id,
@@ -141,20 +152,23 @@ export class ModalEditProfileComponent implements OnInit {
         firstName: this.firstnameC.value,
         lastName: this.lastnameC.value
       }
+      //se manda toda la info actualizada (obj) y ademas el id del usuario
       this.customerService.updateCustomer(this.data.user.id, obj).subscribe(res =>{
         let obj = {
           user: res,
           city: this.cityAux,
           district: this.districtAux
         }
+        //este edit.emit es para que al cerrar el modal se envie la data actualizada en el componente que llamo este modal
         this.edit.emit(obj)
-        this.dialogRef.close();
-        this.progress_bar = true;
+        this.dialogRef.close(); // hace que se cierre el modal
+        this.progress_bar = false; // desaparece la barra de progreso porque ya termino de actualizar en base de datos
       })
 
       
-    } else if(this.data.metadata.userType == 2) {
-
+    } else if(this.data.metadata.userType == 2) { // si el userType es employee entonces se mandan con una estructura de obj distinta
+      
+      //la estructura de este json obj me guie de como lo manda en el swagger y lo copie
       let obj = {
         account: {
           id: this.data.metadata.id
@@ -175,7 +189,7 @@ export class ModalEditProfileComponent implements OnInit {
           id: this.specialtyAux.id
         }
       }
-
+      //se manda toda la info actualizada (obj) y ademas el id del usuario
       this.employeeService.updateEmployee(this.data.user.id, obj).subscribe(res =>{
         let obj = {
           user: res,
@@ -183,9 +197,10 @@ export class ModalEditProfileComponent implements OnInit {
           district: this.districtAux,
           specialty: this.specialtyAux
         }
+        //este edit.emit es para que al cerrar el modal se envie la data actualizada en el componente que llamo este modal
         this.edit.emit(obj);
-        this.dialogRef.close();
-        this.progress_bar = true;
+        this.dialogRef.close(); // hace que se cierre el modal
+        this.progress_bar = false; // desaparece la barra de progreso porque ya termino de actualizar en base de datos
       })
 
     }

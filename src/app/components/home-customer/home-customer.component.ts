@@ -21,8 +21,10 @@ export class HomeCustomerComponent implements OnInit {
               private customerService: CustomerService) { }
 
   ngOnInit() {
+    // primero se traen todos los datos del customer que ha iniciado sesion 
     this.customerService.getCustomerByIdAccount(this.metadata.id).subscribe(customer=>{
       console.log('hola', customer) 
+      // despues de que trae la data del customer, se manda el id y se traen los appointments de dicho customer
       this.appointmentService.getAppointmentByIDCustomer(customer.id).subscribe(res=>{
         console.log('citas customer', res);
         this.dataSource = res;
@@ -31,12 +33,14 @@ export class HomeCustomerComponent implements OnInit {
     
     
   }
+
+  // esta funcion es para abrir el modal donde se mostrara toda la info de dicho appointment
   verDetalles(element){
     console.log(element);
     const dialogRef = this.dialog.open(ModalDetalleAppointmentCComponent,{
       width: '1100px',
       height: '600px',
-      data: element
+      data: element //este element se manda como data inyectable al componente ModalDetalleAppointmentCComponent
       
     })
   }
