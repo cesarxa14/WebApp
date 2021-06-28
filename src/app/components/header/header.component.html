@@ -9,8 +9,8 @@
           <!-- El ngIf=metadata significa que si el usuario ha ingresado a la app se creara un metadata para mostrar los botones si esta logeado -->
           <div routerLinkActive="active" *ngIf="metadata">
             <a mat-button  (click)="toHomePage()">Home</a>
-            <a mat-button  [routerLink]="'/customer'">Customers</a>
-            <a mat-button  [routerLink]="'/employees'">Employee</a>
+            <a mat-button  [routerLink]="'/customers'" *ngIf="metadata.userType == 2">Customers</a>
+            <a mat-button  [routerLink]="'/employees'" *ngIf="metadata.userType == 1">Employees</a>
             <a mat-button  [routerLink]="'/profile'">Profile</a>
           </div>
           <span class="flex-expand"></span>

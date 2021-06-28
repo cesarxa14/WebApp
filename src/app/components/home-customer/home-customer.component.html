@@ -25,6 +25,11 @@
               <th mat-header-cell *matHeaderCellDef> Lastname </th>
               <td mat-cell *matCellDef="let element" [matTooltip]="element.titulo"> <p class="ellipsis"> <b >{{element.employee.lastName}}</b></p></td>
             </ng-container>
+
+            <ng-container matColumnDef="specialty">
+              <th mat-header-cell *matHeaderCellDef> Specialty </th>
+              <td mat-cell *matCellDef="let element" [matTooltip]="element.titulo"> <p class="ellipsis"> <b >{{element.employee.specialty.name}}</b></p></td>
+            </ng-container>
           
             <ng-container matColumnDef="fecha">
               <th mat-header-cell *matHeaderCellDef>Appointment Date </th>

@@ -11,6 +11,10 @@ export class CustomerService {
 
   constructor(private http: HttpClient) { }
 
+  getAllCustomers(): Observable<any> {
+    return this.http.get(`${this.baseURL}`);
+  }
+
   validateEmail(customer): Observable<any> {
     return this.http.post(`${this.baseURL}/validateEmail`, customer);
   }

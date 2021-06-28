@@ -6,16 +6,20 @@ import { LandingComponent} from './components/landing/landing.component'
 import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
+import { ViewCustomersComponent } from './components/view-customers/view-customers.component';
+import { ViewEmployeesComponent } from './components/view-employees/view-employees.component';
 import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
-  {path: '' , component: LandingComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: ''             , component: LandingComponent},
+  {path: 'login'        , component: LoginComponent},
+  {path: 'register'     , component: RegisterComponent},
   {path: 'home-customer', canActivate:[AuthGuard], component: HomeCustomerComponent},
   {path: 'home-employee', canActivate:[AuthGuard], component: HomeEmployeeComponent},
-  {path: 'profile', canActivate:[AuthGuard], component: ProfileComponent}
+  {path: 'profile'      , canActivate:[AuthGuard], component: ProfileComponent},
+  {path: 'customers'    , canActivate:[AuthGuard], component: ViewCustomersComponent},
+  {path: 'employees'    , canActivate:[AuthGuard], component: ViewEmployeesComponent}
 ];
 
 @NgModule({

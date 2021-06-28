@@ -24,12 +24,17 @@ export class HomeEmployeeComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-    //se traen los appointments segun el id del employee
-    this.appointmentService.getAppointmentByIDEmployee(this.metadata.id).subscribe(res=>{
-      //aqui se llena el dataSource que se pone en el html para mostrar la data
-      this.dataSource = res;
-      console.log(res);
+
+    this.employeeService.getEmployeeByIdAccount(this.metadata.id).subscribe((employee:any)=>{
+      
+      this.appointmentService.getAppointmentByIDEmployee(employee.id).subscribe(res=>{
+        //aqui se llena el dataSource que se pone en el html para mostrar la data
+        this.dataSource = res;
+        console.log(res);
+      })
     })
+    //se traen los appointments segun el id del employee
+    
   }
 
   // esta funcion es para abrir el modal donde se mostrara toda la info de dicho appointment

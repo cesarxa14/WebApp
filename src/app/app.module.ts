@@ -16,7 +16,13 @@ import { HomeEmployeeComponent } from './components/home-employee/home-employee.
 import { ModalDetalleAppointmentCComponent } from './components/modal-detalle-appointment-c/modal-detalle-appointment-c.component';
 import { ModalDetalleAppointmentEComponent } from './components/modal-detalle-appointment-e/modal-detalle-appointment-e.component';
 import { ProfileComponent } from './components/profile/profile.component';
-import { ModalEditProfileComponent } from './components/modal-edit-profile/modal-edit-profile.component'
+import { ModalEditProfileComponent } from './components/modal-edit-profile/modal-edit-profile.component';
+import { ViewCustomersComponent } from './components/view-customers/view-customers.component';
+import { ViewEmployeesComponent } from './components/view-employees/view-employees.component';
+import { ModalDetailCustomerComponent } from './components/modal-detail-customer/modal-detail-customer.component'
+import { ModalDetailEmployeeComponent } from './components/modal-detail-employee/modal-detail-employee.component';
+import { ModalConfirmacionComponent } from './components/modal-confirmacion/modal-confirmacion.component';
+import { ModalCreateAppointmentComponent } from './components/modal-create-appointment/modal-create-appointment.component';
 
 
 @NgModule({
@@ -31,7 +37,13 @@ import { ModalEditProfileComponent } from './components/modal-edit-profile/modal
     ModalDetalleAppointmentCComponent,
     ModalDetalleAppointmentEComponent,
     ProfileComponent,
-    ModalEditProfileComponent
+    ModalEditProfileComponent,
+    ViewCustomersComponent,
+    ViewEmployeesComponent,
+    ModalDetailCustomerComponent,
+    ModalDetailEmployeeComponent,
+    ModalConfirmacionComponent,
+    ModalCreateAppointmentComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +56,7 @@ import { ModalEditProfileComponent } from './components/modal-edit-profile/modal
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ModalDetalleAppointmentCComponent, ModalDetalleAppointmentEComponent, ModalEditProfileComponent]
+  entryComponents: [ModalDetalleAppointmentCComponent, ModalDetalleAppointmentEComponent, ModalEditProfileComponent,
+                    ModalDetailCustomerComponent, ModalDetailEmployeeComponent, ModalCreateAppointmentComponent]
 })
 export class AppModule { }

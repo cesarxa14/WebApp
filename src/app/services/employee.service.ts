@@ -13,7 +13,8 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
  
-  getEmployees(): Observable<any>{
+  
+  getAllEmployees(): Observable<any>{
     return this.http.get(`${this.baseURL}`);
   }
 

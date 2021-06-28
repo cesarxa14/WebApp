@@ -13,7 +13,7 @@ import { ModalDetalleAppointmentCComponent } from '../modal-detalle-appointment-
 export class HomeCustomerComponent implements OnInit {
 
   metadata:any = JSON.parse(localStorage.getItem('metadata'))
-  displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
+  displayedColumns: string[] = ['firstname', 'lastname', 'specialty','fecha', 'address', 'status', 'details'];
   dataSource: any;
   constructor(private employeeService: EmployeeService,
               private appointmentService: AppointmentService,
