@@ -14,8 +14,7 @@ import { ModalDetalleAppointmentEComponent } from '../modal-detalle-appointment-
 export class HomeEmployeeComponent implements OnInit {
  
   metadata:any = JSON.parse(localStorage.getItem('metadata'))
- 
-  //estas son las columnas que tendra la tabla, si se quieren poner mas columnas se agregar un elemento a este array
+
   displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
 
   dataSource: any;
@@ -28,12 +27,12 @@ export class HomeEmployeeComponent implements OnInit {
     this.employeeService.getEmployeeByIdAccount(this.metadata.id).subscribe((employee:any)=>{
       
       this.appointmentService.getAppointmentByIDEmployee(employee.id).subscribe(res=>{
-        //aqui se llena el dataSource que se pone en el html para mostrar la data
+    
         this.dataSource = res;
         console.log(res);
       })
     })
-    //se traen los appointments segun el id del employee
+    
     
   }
 

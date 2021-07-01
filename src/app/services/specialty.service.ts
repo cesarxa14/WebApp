@@ -7,7 +7,10 @@ import { Observable} from 'rxjs';
 })
 export class SpecialtyService {
 
-  private baseURL = 'http://localhost:8080/api/specialty';
+  //private baseURL = 'http://localhost:8080/api/specialty';
+  
+  private baseURL='https://appdhome.herokuapp.com/api/specialty';
+
   constructor(private http: HttpClient) { }
 
 

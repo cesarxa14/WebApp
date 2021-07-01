@@ -5,6 +5,7 @@
     /* border: 2px solid red; */
     display: grid;
     grid-template-rows: auto auto;
+    row-gap: 20px;
     height: auto;
 }
 

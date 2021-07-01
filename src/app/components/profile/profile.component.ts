@@ -22,11 +22,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.progress_bar = true;
     if(this.metadata.userType == 1){
-      // se trae toda la data del customer mediante el id 
       this.customerService.getCustomerByIdAccount(this.metadata.id).subscribe(res=>{
         this.data = res;
         this.progress_bar = false;
-        //en esta variable guardaran los datos para que los muestre en el html
         this.user = {
           firstName: res.firstName,
           lastName: res.lastName,

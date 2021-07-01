@@ -1,4 +1,4 @@
-<!-- Este componente es la visto del home de un usuario customer -->
+
 <app-header></app-header>
 
 <div class="citas">
@@ -8,16 +8,13 @@
         </mat-toolbar>
         
     </div>
-    <!-- Esta es la tabla de citas que tiene el customer con distintos employees y sus detalles -->
+    
     <div class="tabla-citas">
-        <!-- el dataSource es la info que se mostrara en la tabla -->
-        <!-- el dataSource se llena con la traida de datos con el service -->
-        <!-- los matColumnDef son las columnas que tendra la tabla, estas columnas se definen en el .ts como displayedColumns -->
+       
         <table  mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
             <ng-container matColumnDef="firstname">
               <th mat-header-cell *matHeaderCellDef> Firstname Employee </th>
-              <!-- element es un objeto del array de objetos (dataSource) -->
               <td mat-cell *matCellDef="let element"> <p class="ellipsis"><b> {{element.employee.firstName}}</b> </p> </td>
             </ng-container>
           
@@ -51,8 +48,7 @@
             <ng-container matColumnDef="details">
             <th mat-header-cell *matHeaderCellDef> More Details </th>
             <td mat-cell *matCellDef="let element; let i = index;">
-              <!-- Este boton es para abrir un modal que mostrara todos los datos del Appointment -->
-              <!-- Se pasa como parametro el element que seria el objeto completo de la fila en la tabla -->
+          
               <button (click)="verDetalles(element)" mat-raised-button color=primary >
                 <span class="material-icons"> info </span>
               </button>

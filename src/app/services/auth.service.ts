@@ -7,7 +7,10 @@ import { Observable} from 'rxjs';
 })
 export class AuthService {
 
-  private baseURL = 'http://localhost:8080/api/auth/account';
+  //private baseURL = 'http://localhost:8080/api/auth/account';
+  
+  private baseURL='https://appdhome.herokuapp.com/api/auth/account';
+
   constructor(private http: HttpClient) { }
 
   login(user): Observable<any>{

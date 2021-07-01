@@ -10,14 +10,11 @@
         <img class="logo" src="../../../assets/img/avatar.png" alt="">
     </div>
     
-    <!-- este es el formulario para poder loguearse  -->
-    <!-- el formGroup es para poder controlar las validaciones de un formulario y su valor (loginForm) se define en el ts  -->
     <form [formGroup]="loginForm" class="form-login">
 
         <mat-form-field appearance="fill">
             <mat-label>Usuario</mat-label>
-             <!--Cada campo del formulario tiene un formControlName -->
-             <!-- Cada campo se definen en la funcion _formBuilder() en el .ts con sus validaciones  -->
+         
             <input matInput placeholder="Ingresa tu usuario" formControlName="usuario">
         </mat-form-field>
 
@@ -30,7 +27,6 @@
             <a routerLink="/register">¿Aun no tienes una cuenta?</a>
         </span>
 
-        <!-- cuando se da click en el boton ingresar lleva a la funcion login()  -->
         <button (click)="login()" class="button-login" mat-raised-button color="primary">
             INGRESAR
         </button>

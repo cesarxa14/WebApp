@@ -9,7 +9,10 @@ import { Observable} from 'rxjs';
 export class EmployeeService {
 
   // URL:string = environment.URL + '/api/employees';
-  private baseURL = 'http://localhost:8080/api/employees';
+  //private baseURL = 'http://localhost:8080/api/employees';
+  
+  private baseURL='https://appdhome.herokuapp.com/api/employees';
+
 
   constructor(private http: HttpClient) { }
  

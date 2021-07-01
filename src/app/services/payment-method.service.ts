@@ -7,7 +7,10 @@ import { Observable} from 'rxjs';
 })
 export class PaymentMethodService {
 
-  private baseURL = 'http://localhost:8080/api/paymentmethods';
+  //private baseURL = 'http://localhost:8080/api/paymentmethods';
+  
+  private baseURL='https://appdhome.herokuapp.com/api/paymentmethods';
+
   constructor(private http: HttpClient) { }
 
   getAllPaymentMethods(): Observable<any>{

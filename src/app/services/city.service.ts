@@ -7,8 +7,13 @@ import { Observable} from 'rxjs';
 })
 export class CityService {
 
-  private baseURL = 'http://localhost:8080/api/cities';
-  private baseURL2 = 'http://localhost:8080/api/districts';
+   
+  private baseURL='https://appdhome.herokuapp.com/api/cities';
+
+  private baseURL2='https://appdhome.herokuapp.com/api/districts';
+
+  //private baseURL = 'http://localhost:8080/api/cities';
+  //private baseURL2 = 'http://localhost:8080/api/districts';
 
   constructor(private http: HttpClient) { }
 

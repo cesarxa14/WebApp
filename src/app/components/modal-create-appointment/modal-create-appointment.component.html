@@ -1,8 +1,8 @@
 <div>
     <h1>Create Appointmet with {{data.firstName}} ({{data.specialty.name}})</h1>
-    <!-- Este mat progress es para que se muestra una barra de carga cuando se da click en editar  -->
+  
     <mat-progress-bar *ngIf="progress_bar" mode="query"></mat-progress-bar>
-    <!-- Este formulario es para editar el profile de un customer y todos sus atributos  -->
+  
     <div>
         <form class="formulario" [formGroup]="appointmentForm">
     

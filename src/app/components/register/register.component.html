@@ -1,9 +1,7 @@
 <app-header></app-header>
-<!-- En este componente se motrara el registro el cual cuenta con 2 formularios  -->
-<!-- El primer formulario es para los datos de la cuenta y el otro es para los datos de cada usuario  -->
 <mat-card class="formulario">
     <mat-horizontal-stepper  #stepper>
-        <!-- Este es el primer formulario que se mostrara  -->
+
         <mat-step [stepControl]="registerForm1">
           <form [formGroup]="registerForm1">
             <ng-template matStepLabel>Usuario y Contraseña</ng-template>
@@ -15,22 +13,21 @@
     
             <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
-                <input matInput placeholder="Ingresa tu contraseña" formControlName="password">
+                <input matInput placeholder="Ingresa tu contraseña" type="password" formControlName="password">
             </mat-form-field>
     
-            <!-- Aca se elige si el usuario sera customer o employee  -->
+    
             <mat-radio-group style="grid-column: 1/3;" aria-label="Select an option" formControlName="typeuser">
                 <mat-radio-button value="1" style="margin-right: 20px; margin-bottom: 20px;">Cliente</mat-radio-button>
-                <mat-radio-button value="2">Trabajdor</mat-radio-button>
+                <mat-radio-button value="2">Trabajador</mat-radio-button>
             </mat-radio-group>
             <div>
-              <!-- Este boton es para pasar al siguiente formulario  -->
+
               <button mat-raised-button color="primary" [disabled]="registerForm1.invalid" (click)="validarDatos(stepper)">Siguiente</button>
             </div>
           </form>
         </mat-step>
 
-        <!-- Aca esta el segundo formulario pero en caso de que haya elegido ser customer en el formulario anterior  -->
         <mat-step [stepControl]="registerForm2" label="Datos Personales" *ngIf="!firstData && account.typeuser == 1">
           <form [formGroup]="registerForm2">
             <mat-form-field>
@@ -59,10 +56,7 @@
                 <input matInput formControlName="cellphone" placeholder="Ingrese su numero de celular" required>
               </mat-form-field>
 
-              <!-- <mat-form-field>
-                <mat-label>Ciudad</mat-label>
-                <input matInput formControlName="city" placeholder="Ingrese su ciudad" required>
-              </mat-form-field> -->
+
 
               <mat-form-field appearance="fill">
                 <mat-label>Ciudad</mat-label>
@@ -83,20 +77,15 @@
                 </mat-select>
               </mat-form-field>
 
-              <!-- <mat-form-field>
-                <mat-label>Distrito</mat-label>
-                <input matInput formControlName="district" placeholder="Ingrese su distrito" required>
-              </mat-form-field> -->
+         
             <div>
-              <!-- <button mat-button matStepperPrevious>Regresar</button> -->
-              
-              <!-- Este boton es para pasar al ultimo paso que es de confirmacion  -->
+        
               <button mat-button  color="primary" (click)="validarEmail(stepper)">Siguiente</button>
             </div>
           </form>
         </mat-step>
 
-        <!-- Aca esta el segundo formulario pero en caso de que haya elegido ser employee en el formulario anterior  -->
+        
         <mat-step [stepControl]="registerForm3" label="Datos Personales" *ngIf="!firstData && account.typeuser == 2">
             <form [formGroup]="registerForm3">
               <mat-form-field>
@@ -160,7 +149,7 @@
               <div>
                 <!-- <button mat-button matStepperPrevious>Regresar</button> -->
 
-                <!-- Este boton es para pasar al ultimo paso que es de confirmacion  -->
+                
                 <button mat-button color="primary" (click)="validarEmail(stepper)">Siguiente</button>
               </div>
             </form>
@@ -172,7 +161,7 @@
           <div>
             <!-- <button mat-button matStepperPrevious>Regresar</button> -->
 
-            <!-- Este boton confirma el registro con la funcion registrarse() -->
+            
             <button mat-button color="primary" (click)="registrarse()">Registrarse</button>
           </div>
         </mat-step>
