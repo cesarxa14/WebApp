@@ -5,6 +5,7 @@ import { CustomerService } from '../../services/customer.service';
 import { PaymentMethodService } from '../../services/payment-method.service';
 import { AppointmentService } from '../../services/appointment.service';
 import {AbstractControl} from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 
 @Component({
@@ -27,6 +28,7 @@ export class ModalCreateAppointmentComponent implements OnInit {
               private customerService: CustomerService,
               private paymentMethodService: PaymentMethodService,
               private appointmentService: AppointmentService,
+              private _snackBar: MatSnackBar,
               public dialogRef: MatDialogRef<ModalCreateAppointmentComponent>) { }
 
   ngOnInit() {
@@ -84,6 +86,7 @@ export class ModalCreateAppointmentComponent implements OnInit {
     this.appointmentService.insertAppointment(obj).subscribe(res =>{
       console.log(res)
       this.progress_bar = false;
+      this._snackBar.open('Se creó la cita con éxito!', 'Cerrar', {duration:4000, horizontalPosition:'start'})
       this.dialogRef.close();
     })
   }

@@ -7,7 +7,6 @@
         </div>
         <div>
             <mat-form-field appearance="fill">
-                <!-- <mat-label>Enter your password</mat-label> -->
                 <input matInput placeholder="Buscar customers">
                 <button mat-icon-button matSuffix >
                     <span class="material-icons"> search </span>
@@ -17,8 +16,9 @@
         
         
     </div>
-
+    <mat-progress-bar *ngIf="progress_bar" mode="query"></mat-progress-bar>
     <div class="body-contenedor">
+        
         <div class="card-customer" *ngFor="let employee of listEmployees">
             <mat-card class="example-card" >
                 <mat-card-header>

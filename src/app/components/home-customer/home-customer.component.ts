@@ -12,6 +12,7 @@ import { ModalDetalleAppointmentCComponent } from '../modal-detalle-appointment-
 })
 export class HomeCustomerComponent implements OnInit {
 
+  progress_bar: boolean = false;
   metadata:any = JSON.parse(localStorage.getItem('metadata'))
   displayedColumns: string[] = ['firstname', 'lastname', 'specialty','fecha', 'address', 'status', 'details'];
   dataSource: any;
@@ -21,11 +22,12 @@ export class HomeCustomerComponent implements OnInit {
               private customerService: CustomerService) { }
 
   ngOnInit() {
- 
+    this.progress_bar = true;
     this.customerService.getCustomerByIdAccount(this.metadata.id).subscribe(customer=>{
       console.log('hola', customer) 
       this.appointmentService.getAppointmentByIDCustomer(customer.id).subscribe(res=>{
         console.log('citas customer', res);
+        this.progress_bar = false;
         this.dataSource = res;
       })
     })

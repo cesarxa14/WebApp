@@ -11,13 +11,16 @@ import { ModalDetailCustomerComponent } from '../modal-detail-customer/modal-det
 })
 export class ViewCustomersComponent implements OnInit {
 
+  progress_bar: boolean = false;
   listCustomers: any[];
   constructor(private customerService: CustomerService,
               public dialog: MatDialog) { }
 
   hide = true;
   ngOnInit() {
+    this.progress_bar = true;
     this.customerService.getAllCustomers().subscribe((res:any)=>{
+      this.progress_bar = false;
       this.listCustomers = res;
     })
     

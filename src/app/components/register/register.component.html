@@ -14,6 +14,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Contraseña</mat-label>
                 <input matInput placeholder="Ingresa tu contraseña" type="password" formControlName="password">
+                <mat-error *ngIf="password.hasError('minlength')">Mínimo 4 caracteres</mat-error>
             </mat-form-field>
     
     
@@ -49,6 +50,7 @@
               <mat-form-field>
                 <mat-label>Correo</mat-label>
                 <input matInput formControlName="email" placeholder="Ingrese su correo" required>
+                <mat-error *ngIf="emailC.hasError('email')">Ingrese un email válido</mat-error>
               </mat-form-field>
 
               <mat-form-field>
@@ -106,12 +108,10 @@
                 <mat-form-field>
                   <mat-label>Correo</mat-label>
                   <input matInput formControlName="email" placeholder="Ingrese su correo" required>
+                  <mat-error *ngIf="emailE.hasError('email')">Ingrese un email válido</mat-error>
                 </mat-form-field>
 
-                <!-- <mat-form-field>
-                    <mat-label>Especialidad</mat-label>
-                    <input matInput formControlName="specialty" placeholder="Ingrese su especialidad" required>
-                  </mat-form-field> -->
+
 
                   <mat-form-field appearance="fill">
                     <mat-label>Especialidad</mat-label>
@@ -147,7 +147,6 @@
                 </mat-form-field>
   
               <div>
-                <!-- <button mat-button matStepperPrevious>Regresar</button> -->
 
                 
                 <button mat-button color="primary" (click)="validarEmail(stepper)">Siguiente</button>
@@ -159,7 +158,6 @@
           <ng-template matStepLabel>Done</ng-template>
           <p>Confirmar Registro</p>
           <div>
-            <!-- <button mat-button matStepperPrevious>Regresar</button> -->
 
             
             <button mat-button color="primary" (click)="registrarse()">Registrarse</button>

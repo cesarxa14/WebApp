@@ -62,11 +62,10 @@ export class RegisterComponent implements OnInit {
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
       usuario: ['', [Validators.required, Validators.pattern(pattern)]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(4)]],
       typeuser: [null, [Validators.required]]
     }) 
     form.valueChanges.subscribe(()=>{
-      // this.invalidForm = this.loginForm.invalid;
     });
     return form;
   }
@@ -83,7 +82,7 @@ export class RegisterComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.pattern(pattern)]],
       lastname: ['', [Validators.required]],
       dni: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       cellphone: ['', [Validators.required]],
       city: [null, [Validators.required]],
       district: [null, [Validators.required]],
@@ -108,7 +107,7 @@ export class RegisterComponent implements OnInit {
       firstname: ['', [Validators.required, Validators.pattern(pattern)]],
       lastname: ['', [Validators.required]],
       dni: ['', [Validators.required]],
-      email: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
       specialty: ['', [Validators.required]],
       cellphone: ['', [Validators.required]],
       city: [null, [Validators.required]],

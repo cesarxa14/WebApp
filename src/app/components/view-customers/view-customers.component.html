@@ -15,10 +15,11 @@
             </mat-form-field>
         </div>
         
-        
+    <mat-progress-bar *ngIf="progress_bar" mode="query"></mat-progress-bar>
     </div>
-
+    
     <div class="body-contenedor">
+        
         <div class="card-customer" *ngFor="let customer of listCustomers">
             <mat-card class="example-card" >
                 <mat-card-header>
@@ -31,7 +32,6 @@
                 </mat-card-content>
                 <mat-card-actions>
                   <button mat-raised-button (click)="abrirModalDetail(customer)" color="primary">Detalles</button>
-                  <!-- <button mat-raised-button color="primary">Contratar</button> -->
                 </mat-card-actions>
             </mat-card>
 

@@ -11,12 +11,15 @@ import { ModalCreateAppointmentComponent } from '../modal-create-appointment/mod
 })
 export class ViewEmployeesComponent implements OnInit {
 
+  progress_bar: boolean = false;
   listEmployees: any[];
   constructor(private employeeService: EmployeeService,
               public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.progress_bar = true;
     this.employeeService.getAllEmployees().subscribe((res:any)=>{
+      this.progress_bar = false;
       this.listEmployees = res;
       console.log('employees', res)
     })

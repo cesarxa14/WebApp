@@ -13,6 +13,7 @@ import { ModalDetalleAppointmentEComponent } from '../modal-detalle-appointment-
 })
 export class HomeEmployeeComponent implements OnInit {
  
+  progress_bar: boolean = false;
   metadata:any = JSON.parse(localStorage.getItem('metadata'))
 
   displayedColumns: string[] = ['firstname', 'lastname', 'fecha', 'address', 'status', 'details'];
@@ -23,11 +24,11 @@ export class HomeEmployeeComponent implements OnInit {
               public dialog: MatDialog) { }
 
   ngOnInit() {
-
+    this.progress_bar = true;
     this.employeeService.getEmployeeByIdAccount(this.metadata.id).subscribe((employee:any)=>{
       
       this.appointmentService.getAppointmentByIDEmployee(employee.id).subscribe(res=>{
-    
+        this.progress_bar = false;
         this.dataSource = res;
         console.log(res);
       })
@@ -36,13 +37,12 @@ export class HomeEmployeeComponent implements OnInit {
     
   }
 
-  // esta funcion es para abrir el modal donde se mostrara toda la info de dicho appointment
   verDetalles(element){
     console.log(element);
     const dialogRef = this.dialog.open(ModalDetalleAppointmentEComponent,{
       width: '1100px',
       height: '600px',
-      data: element //este element se manda como data inyectable al componente ModalDetalleAppointmentEComponent
+      data: element 
       
     })
   }

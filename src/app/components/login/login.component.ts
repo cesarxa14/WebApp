@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     let pattern = '^[a-zA-Z0-9._@\-]*$';
     let form = this._formBuilder.group({
       usuario: ['', [Validators.required, Validators.pattern(pattern)]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(4)]]
     }) 
     form.valueChanges.subscribe(()=>{
  
